@@ -11,10 +11,20 @@ services:
     volumes:
       - mongodb_data:/data/db
     networks:
-      - mongo-compose-network
+      - compose-network
+
+  app:
+    build: .
+    environment:
+      PORT: ${PORT}
+      MONGODB_URI: ${MONGODB_URI}
+    ports:
+      - "8080:8080"
+    networks:
+      - compose-network
 
 networks: 
-    mongo-compose-network:
+    compose-network:
       driver: bridge
 volumes:
   mongodb_data: 
