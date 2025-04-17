@@ -1,0 +1,142 @@
+{
+  "info": {
+    "name": "Todos",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create TODO",
+      "event": [],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "http://localhost:8080/todos",
+          "protocol": "http",
+          "host": [
+            "localhost:8080"
+          ],
+          "path": [
+            "todos"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Alguma atividade legal\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Adicionar comentário a um todo",
+      "event": [],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "http://localhost:8080/todos/:id/comments",
+          "protocol": "http",
+          "host": [
+            "localhost:8080"
+          ],
+          "path": [
+            "todos",
+            ":id",
+            "comments"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "key": "id",
+              "value": ""
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"comment\": \"Um comentário super hiper mega legal\",\n  \"username\": \"Rennan\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Get todo by id",
+      "event": [],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "http://localhost:8080/todos/:id",
+          "protocol": "http",
+          "host": [
+            "localhost:8080"
+          ],
+          "path": [
+            "todos",
+            ":id"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "key": "id",
+              "value": "dd9cde99-1bbf-11f0-a1a5-00155d504150"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Delete todo",
+      "event": [],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "http://localhost:8080/todos/:id",
+          "protocol": "http",
+          "host": [
+            "localhost:8080"
+          ],
+          "path": [
+            "todos",
+            ":id"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "key": "id",
+              "value": "f7b918e5-1bb1-11f0-b273-00155d504150"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "variable": []
+}
