@@ -24,12 +24,12 @@ func NewServer(port string) *Server {
 func (s *Server) ConfigureRoutes(
 	createTodo cases.CreateTodoCase,
 	addCommentTodoCase cases.AddCommentTodoCase,
-	findTodoById cases.FindTodoByIdCase,
+	findTodoByIdCase cases.FindTodoByIdCase,
 	deleteTodoCase cases.DeleteTodoCase,
 ) {
 	createTodoHandler := handlers.NewCreateTodoHandler(createTodo)
 	createTodoCommentHandler := handlers.NewAddCommentHandler(addCommentTodoCase)
-	newFindTodoByIdHandler := handlers.NewFindTodoByIdHandler(findTodoById)
+	newFindTodoByIdHandler := handlers.NewFindTodoByIdHandler(findTodoByIdCase)
 	deleteTodoHandler := handlers.NewDeleteTodoHandler(deleteTodoCase)
 
 	s.router.Post("/todos", createTodoHandler.Create)
