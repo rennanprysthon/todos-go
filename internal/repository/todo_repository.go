@@ -62,7 +62,7 @@ func (r *TodoRepository) Update(uuid string, todo *domain.Todo) (*domain.Todo, e
 
 	todo.UpdatedAt = time.Now()
 
-	_, err := r.collection.ReplaceOne(context.TODO(), filter, todo)
+	_, err := r.collection.ReplaceOne(context.Background(), filter, todo)
 	if err != nil {
 		return nil, err
 	}
