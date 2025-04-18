@@ -1,4 +1,3 @@
-version: '3'
 services:
   mongo:
     image: mongodb/mongodb-community-server
@@ -19,9 +18,11 @@ services:
       PORT: ${PORT}
       MONGODB_URI: ${MONGODB_URI}
     ports:
-      - "8080:8080"
+      - "8081:8081"
     networks:
       - compose-network
+    depends_on:
+      - mongo
 
 networks: 
     compose-network:

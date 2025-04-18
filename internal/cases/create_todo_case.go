@@ -2,10 +2,7 @@ package cases
 
 import (
 	"context"
-	"log"
-	"time"
 
-	"github.com/google/uuid"
 	"github.com/rennanprysthon/go-todo/internal/domain"
 	"github.com/rennanprysthon/go-todo/internal/dto"
 )
@@ -20,20 +17,13 @@ func NewCreateTodoCase(todoRepository domain.TodoRepository) *CreateTodoCase {
 	}
 }
 
-func (c *CreateTodoCase) CreateTodo(todoInput dto.TodoInput) *domain.Todo {
-	uuid, err := uuid.NewUUID()
+func (c *CreateTodoCase) CreateTodo(todoInput dto.TodoInput) (*domain.Todo, error) {
+	todo := domain.NewTodo(todoInput.Title)
+
+	newTodo, err := c.repository.Save(context.TODO(), todo)
 	if err != nil {
-		log.Fatal("erro generating uuid: ", err)
+		return nil, domain.ErrCreateTodo
 	}
 
-	todo := &domain.Todo{
-		ID:        uuid.String(),
-		Title:     todoInput.Title,
-		CreatedAt: time.Now(),
-		UpdatedAt: time.Now(),
-	}
-
-	c.repository.Save(context.TODO(), todo)
-
-	return todo
+	return newTodo, nil
 }

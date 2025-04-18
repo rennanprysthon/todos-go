@@ -37,7 +37,22 @@ func (c *CreateTodoHandler) Create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	todo := c.createTodo.CreateTodo(input)
+	todo, err := c.createTodo.CreateTodo(input)
+
+	w.Header().Set("Content-Type", "application/json")
+	if err != nil {
+		w.WriteHeader(http.StatusCreated)
+		errorResponse := responses.ErrorResponse{
+			Timestamp: int(time.Now().UnixNano()),
+			Status:    500,
+			Message:   "Erro interno do sistema",
+		}
+
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(errorResponse)
+		return
+	}
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)

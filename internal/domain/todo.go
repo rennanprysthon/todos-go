@@ -1,6 +1,7 @@
 package domain
 
 import (
+	"sync"
 	"time"
 
 	"github.com/google/uuid"
@@ -13,6 +14,7 @@ type Comment struct {
 }
 
 type Todo struct {
+	mu          sync.RWMutex
 	ID          string
 	Title       string
 	Comments    []Comment
@@ -22,6 +24,13 @@ type Todo struct {
 }
 
 func (t *Todo) AddComment(username, text string) {
+	t.mu.Lock()
+	defer t.mu.Unlock()
+
+	if t.Comments != nil {
+		t.Comments = make([]Comment, 0)
+	}
+
 	t.Comments = append(t.Comments, Comment{
 		Username:  username,
 		Text:      text,
