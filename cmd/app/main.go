@@ -25,7 +25,7 @@ func main() {
 
 	client, err := mongo.Connect(options.Client().ApplyURI(uri))
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("erro connecting to mongo: ", err)
 	}
 	defer func() {
 		if err := client.Disconnect(context.TODO()); err != nil {

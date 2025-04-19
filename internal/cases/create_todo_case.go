@@ -20,7 +20,7 @@ func NewCreateTodoCase(todoRepository domain.TodoRepository) *CreateTodoCase {
 func (c *CreateTodoCase) CreateTodo(todoInput dto.TodoInput) (*domain.Todo, error) {
 	todo := domain.NewTodo(todoInput.Title)
 
-	newTodo, err := c.repository.Save(context.TODO(), todo)
+	newTodo, err := c.repository.Save(context.Background(), todo)
 	if err != nil {
 		return nil, domain.ErrCreateTodo
 	}

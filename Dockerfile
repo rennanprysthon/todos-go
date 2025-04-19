@@ -1,23 +1,10 @@
-FROM golang:latest as build
-
+FROM golang:1.23.4 as builder
 WORKDIR /app
-
-# Copy the Go module files
-COPY go.mod .
-COPY go.sum .
-
-# Download the Go module dependencies
-RUN go mod download
 
 COPY . .
+RUN go mod download
+RUN go build -o ./main cmd/app/main.go
 
-RUN go build -o /myapp ./cmd/app
-
-FROM alpine:latest as run
-
-# Copy the application executable from the build image
-COPY --from=build /myapp /myapp
-
-WORKDIR /app
 EXPOSE 8080
-CMD ["/myapp"]
+
+ENTRYPOINT ["./main"]

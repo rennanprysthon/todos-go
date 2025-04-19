@@ -21,10 +21,10 @@ func NewTodoRepository(collection *mongo.Collection) *TodoRepository {
 	}
 }
 
-func (r *TodoRepository) Save(context context.Context, newTodo *domain.Todo) (*domain.Todo, error) {
-	result, err := r.collection.InsertOne(context, newTodo)
+func (r *TodoRepository) Save(ctx context.Context, newTodo *domain.Todo) (*domain.Todo, error) {
+	result, err := r.collection.InsertOne(ctx, newTodo)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("Error inserting document: ", err)
 		return nil, err
 	}
 
