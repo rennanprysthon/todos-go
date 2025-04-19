@@ -17,12 +17,13 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-    
+          
       - name: Build and deploy Container App
         uses: azure/container-apps-deploy-action@v1
         with:
-          appSourcePath: ${{ github.workspace }}/src
           acrName: todoregister
           containerAppName: rennanprysthon/todoapp
           resourceGroup: todo-app-poc
+          imageToDeploy: myregistry.azurecr.io/app:${{ github.sha }}
+
 
